@@ -1,0 +1,21 @@
+import express from 'express';
+import botQueue from '../worker/botWorker';
+import auth from '../middleware/auth';
+import prisma from '../prismaClient';
+const router = express.Router();
+router.use(auth);
+
+router.post('/:id/start', async (req, res) => {
+  const botId = req.params.id;
+  await botQueue.add('run', { botId });
+  await prisma.bot.update({ where: { id: botId }, data: { status: 'running' } });
+  res.json({ ok: true });
+});
+
+router.post('/:id/stop', async (req, res) => {
+  // BullMQ jobs can be paused/cancelled
+  await prisma.bot.update({ where: { id: req.params.id }, data: { status: 'stopped' } });
+  res.json({ ok: true });
+});
+
+export default router;
