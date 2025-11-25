@@ -1,79 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>KIMHUBFX • Official Platform</title>
-    <link rel="stylesheet" href="style.css">
-    <style>
-        body {
-            background: linear-gradient(135deg, #0f0f0f, #1b1b1b);
-            color: #fff;
-            font-family: Arial, sans-serif;
-            text-align: center;
-            padding: 0;
-            margin: 0;
-        }
-
-        .landing-container {
-            padding: 60px 20px;
-        }
-
-        .logo {
-            font-size: 38px;
-            font-weight: bold;
-            color: #ff0055;
-            margin-bottom: 15px;
-            text-shadow: 0 0 10px #ff0055;
-        }
-
-        .subtitle {
-            font-size: 18px;
-            color: #ccc;
-            margin-bottom: 40px;
-        }
-
-        .btn-landing {
-            display: block;
-            width: 80%;
-            margin: 10px auto;
-            padding: 14px;
-            background: #ff0055;
-            color: #fff;
-            font-size: 18px;
-            border-radius: 8px;
-            text-decoration: none;
-            transition: 0.2s;
-        }
-
-        .btn-landing:hover {
-            transform: scale(1.05);
-        }
-
-        .footer {
-            margin-top: 60px;
-            font-size: 13px;
-            color: #777;
-        }
-    </style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>KIMHUBFX • Home</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <header class="topbar">
+    <div class="brand">KIMHUBFX</div>
+  </header>
 
-<div class="landing-container">
-    <div class="logo">KIMHUBFX</div>
-    <div class="subtitle">
-        Your trusted platform for Deriv dashboard monitoring and account access.
+  <main class="center">
+    <h1>Welcome to KIMHUBFX</h1>
+    <p class="lead">Monitor your Deriv account and live R_100 prices — fast and simple.</p>
+
+    <div class="actions">
+      <a class="btn" href="login.html">Go to Login / Signup</a>
+      <a class="btn ghost" href="https://deriv.partners/rx?ca=kimhuhfx.com&utm_campaign=dynamicworks&utm_medium=affiliate&utm_source=CU154142" target="_blank" rel="noopener">Create Deriv Account</a>
     </div>
 
-    <a class="btn-landing" href="login.html">Login to Dashboard</a>
+    <section class="features">
+      <div class="card">
+        <h3>Live Price</h3>
+        <p>R_100 tick stream with last digit highlighted.</p>
+      </div>
+      <div class="card">
+        <h3>Secure Login</h3>
+        <p>Deriv OAuth — your credentials stay on Deriv servers.</p>
+      </div>
+      <div class="card">
+        <h3>Simple Dashboard</h3>
+        <p>Balance, connection status and live ticks.</p>
+      </div>
+    </section>
 
-    <a class="btn-landing" 
-       href="https://deriv.partners/rx?ca=kimhuhfx.com&utm_campaign=dynamicworks&utm_medium=affiliate&utm_source=CU154142"
-       target="_blank">
-       Create Deriv Account
-    </a>
+    <footer class="footer">
+      © <span id="year"></span> KIMHUBFX — Built with care.
+    </footer>
+  </main>
 
-    <div class="footer">© 2025 KIMHUBFX — All Rights Reserved</div>
-</div>
-
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
