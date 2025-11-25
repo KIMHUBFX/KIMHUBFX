@@ -1,27 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>KIMHUBFX Login</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>KIMHUBFX • Login</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <header class="topbar">
+    <div class="brand">KIMHUBFX</div>
+  </header>
 
-<div class="container">
-    <h2>Welcome to KIMHUBFX</h2>
-    <p>Login or create a Deriv account to continue</p>
+  <main class="center small">
+    <h2>Login or Create Account</h2>
+    <p>Use Deriv's secure pages to sign up or sign in. We never collect passwords.</p>
 
-    <a class="btn" 
-       href="https://deriv.partners/rx?ca=kimhuhfx.com&utm_campaign=dynamicworks&utm_medium=affiliate&utm_source=CU154142"
-       target="_blank">
-       Create Deriv Account
-    </a>
+    <div class="actions stacked">
+      <!-- Signup (affiliate) -->
+      <a class="btn" href="https://deriv.partners/rx?ca=kimhuhfx.com&utm_campaign=dynamicworks&utm_medium=affiliate&utm_source=CU154142" target="_blank" rel="noopener">Create Deriv Account</a>
 
-    <a class="btn" 
-       href="https://oauth.deriv.com/oauth2/authorize?app_id=112604&l=EN&response_type=token&redirect_uri=https://kimhubfx.github.io/KIMHUBFX-DOMAIN-/dashboard.html">
-       Login to Deriv
-    </a>
-</div>
+      <!-- OAuth login — redirect to your GitHub Pages dashboard on success -->
+      <a class="btn" id="deriv-login"
+         href="https://oauth.deriv.com/oauth2/authorize?app_id=112604&l=EN&response_type=token&redirect_uri=https://kimhubfx.github.io/KIMHUBFX/dashboard.html">
+         Login to Deriv (safe)
+      </a>
 
+      <a class="btn ghost" href="index.html">Back to Home</a>
+    </div>
+
+    <div class="note">
+      After successful login you'll be redirected to the KIMHUBFX dashboard.
+    </div>
+  </main>
 </body>
 </html>
