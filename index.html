@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
-    <meta-name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>KIMHUBFX – Welcome</title>
 
     <style>
@@ -11,49 +11,53 @@
             background: #0e0f1a; /* Deriv dark background */
             color: #ffffff;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             height: 100vh;
             margin: 0;
+            padding: 0;
             text-align: center;
         }
-        .box {
-            background: #131426; /* Deriv panel color */
-            padding: 40px;
-            border-radius: 10px;
-            width: 90%;
-            max-width: 350px;
-            border: 1px solid #2a2c4a;
-        }
+
         h2 {
-            color: #ff444f;  /* Deriv red */
+            font-size: 28px;
+            color: #ff444f; /* Deriv red */
             margin-bottom: 10px;
         }
+
+        p {
+            color: #d3d3d3;
+            margin-bottom: 30px;
+        }
+
         .btn {
             display: block;
-            width: 100%;
+            width: 260px;
             padding: 15px;
-            margin-top: 12px;
-            border-radius: 8px;
+            margin: 10px 0;
+            border-radius: 6px;
             text-decoration: none;
             font-weight: bold;
             font-size: 16px;
+            text-align: center;
         }
+
         .primary {
             background: #ff444f; /* Deriv red */
             color: white;
         }
+
         .secondary {
-            background: #85acb0; /* Deriv soft cyan-grey */
+            background: #85acb0; /* Deriv soft grey */
             color: #0e0f1a;
         }
     </style>
 </head>
 <body>
 
-<div class="box">
-    <h2>KIMHUBFX</h2>
-    <p style="color:#dcdcdc;">Choose an option to continue</p>
+    <h2>Welcome to KIMHUBFX</h2>
+    <p>Select an option to continue</p>
 
     <!-- LOGIN BUTTON -->
     <a class="btn primary"
@@ -66,7 +70,6 @@
        href="https://deriv.com/signup/?ref=kimhubfx&tag=affiliate">
        Create Account
     </a>
-</div>
 
 </body>
 </html>
