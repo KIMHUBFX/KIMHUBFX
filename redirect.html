@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Redirecting...</title>
+    <script>
+        // Extract the "token" parameter from the URL
+        const params = new URLSearchParams(window.location.search);
+        const token = params.get("token");
+
+        if (token) {
+            // Save token so dashboard can use it
+            localStorage.setItem("deriv_token", token);
+            window.location.href = "dashboard.html"; 
+        } else {
+            document.body.innerHTML = "<h2>No token received</h2>";
+        }
+    </script>
+</head>
+<body>
+    <p>Logging you in...</p>
+</body>
+</html>
