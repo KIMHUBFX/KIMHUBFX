@@ -1,31 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>KIMHUBFX • Login</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login | KIMHUBFX</title>
+  <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-  <header class="topbar">
-    <div class="brand">KIMHUBFX</div>
-  </header>
 
-  <main class="center small">
-    <h2>Login to KIMHUBFX</h2>
-    <p>Use Deriv's secure login. You will be redirected back to the dashboard.</p>
+  <div class="container">
+      <h2>Login to Deriv</h2>
 
-    <!-- OAuth login — uses your registered App ID and redirect -->
-    <div class="actions stacked">
-      <a class="btn" id="loginBtn"
-         href="https://oauth.deriv.com/oauth2/authorize?app_id=112604&l=EN&response_type=token&redirect_uri=https://kimhubfx.github.io/KIMHUBFX/dashboard.html">
-         Login
-      </a>
+      <button id="loginBtn">Login</button>
+  </div>
 
-      <a class="btn ghost" href="index.html">Back to Home</a>
-    </div>
+  <script>
+    document.getElementById("loginBtn").addEventListener("click", function() {
 
-    <div class="note">After approving, allow the redirect — you'll land on the dashboard automatically.</div>
-  </main>
+      const app_id = 112604;
+
+      // Your REDIRECT URL
+      const redirect = "https://kimhubfx.github.io/KIMHUBFX/redirect.html";
+
+      const oauth_url = `https://oauth.deriv.com/oauth2/authorize?app_id=${app_id}&l=EN&redirect_uri=${redirect}`;
+
+      // Go to Deriv login
+      window.location.href = oauth_url;
+    });
+  </script>
+
 </body>
 </html>
