@@ -7,14 +7,20 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <header class="topbar">
-    <div class="brand">KIMHUBFX</div>
-    <nav>
-      <a class="navlink" href="index.html">Home</a>
-      <a class="navlink" href="login.html">Login</a>
-      <button class="btn small" id="logoutBtn">Logout</button>
-    </nav>
-  </header>
+  <nav class="top-nav">
+    <a class="nav-left brand" href="index.html">KIMHUBFX</a>
+
+    <div class="nav-right">
+      <a class="nav-btn inactive" id="dp-tool">DP Tool</a>
+      <a class="nav-btn" href="strategies.html">Strategies</a>
+      <a class="nav-btn" href="https://www.tradingview.com/chart/" target="_blank" rel="noopener">Analysis</a>
+      <a class="nav-btn" href="freebots.html">Free Bots</a>
+
+      <a class="nav-btn" href="wallet.html">Deposit / Withdraw</a>
+      <span id="accountBox" class="account-box">—</span>
+      <button id="logoutBtn" class="btn small">Logout</button>
+    </div>
+  </nav>
 
   <main class="center">
     <section class="card wide">
@@ -45,6 +51,13 @@
 
   <script src="app.js"></script>
   <script>
+    // small UI behavior: disable dp-tool click (inactive)
+    document.getElementById('dp-tool').addEventListener('click', (e) => {
+      e.preventDefault();
+      alert('DP Tool will be available soon.');
+    });
+
+    // logout button handled in app.js but ensure element exists
     document.getElementById('logoutBtn').addEventListener('click', () => {
       logout();
     });
