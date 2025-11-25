@@ -1,66 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>KIMHUBFX • Dashboard</title>
-  <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - KIMHUBFX</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <nav class="top-nav">
-    <a class="nav-left brand" href="index.html">KIMHUBFX</a>
 
-    <div class="nav-right">
-      <a class="nav-btn inactive" id="dp-tool">DP Tool</a>
-      <a class="nav-btn" href="strategies.html">Strategies</a>
-      <a class="nav-btn" href="https://www.tradingview.com/chart/" target="_blank" rel="noopener">Analysis</a>
-      <a class="nav-btn" href="freebots.html">Free Bots</a>
+<div class="navbar">
+    <a href="dashboard.html">Dashboard</a>
+    <a href="#" class="inactive">DP Tool</a>
+    <a href="strategies.html">Strategies</a>
+    <a href="https://www.tradingview.com/chart/">Analysis</a>
+    <a href="freebots.html">Free Bots</a>
+    <a href="wallet.html">Wallet</a>
+</div>
 
-      <a class="nav-btn" href="wallet.html">Deposit / Withdraw</a>
-      <span id="accountBox" class="account-box">—</span>
-      <button id="logoutBtn" class="btn small">Logout</button>
-    </div>
-  </nav>
+<div class="container">
+    <h2>Account Balance</h2>
+    <div id="balance">Loading...</div>
 
-  <main class="center">
-    <section class="card wide">
-      <div class="row">
-        <div>
-          <h3>Account Balance</h3>
-          <div id="balanceBox" class="big">—</div>
-        </div>
+    <h2>Last Tick</h2>
+    <div id="tick">—</div>
+</div>
 
-        <div>
-          <h3>Connection</h3>
-          <div id="status" class="status waiting">Waiting for connection...</div>
-        </div>
-      </div>
-    </section>
-
-    <section class="card">
-      <h3>R_100 Live Price</h3>
-      <div id="tickBox" class="tick">—</div>
-      <div id="tickTime" class="muted">—</div>
-    </section>
-
-    <section class="card">
-      <h3>Event History</h3>
-      <div id="history" class="history">No events yet</div>
-    </section>
-  </main>
-
-  <script src="app.js"></script>
-  <script>
-    // small UI behavior: disable dp-tool click (inactive)
-    document.getElementById('dp-tool').addEventListener('click', (e) => {
-      e.preventDefault();
-      alert('DP Tool will be available soon.');
-    });
-
-    // logout button handled in app.js but ensure element exists
-    document.getElementById('logoutBtn').addEventListener('click', () => {
-      logout();
-    });
-  </script>
+<script src="app.js"></script>
 </body>
 </html>
