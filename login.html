@@ -1,36 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - KIMHUBFX</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>KIMHUBFX • Login</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <header class="topbar">
+    <div class="brand">KIMHUBFX</div>
+  </header>
 
-<div class="container">
-    <h2>Enter Deriv Token</h2>
+  <main class="center small">
+    <h2>Login to KIMHUBFX</h2>
+    <p>Use Deriv's secure login. You will be redirected back to the dashboard.</p>
 
-    <input type="text" id="token" placeholder="Enter your Deriv API Token">
+    <!-- OAuth login — uses your registered App ID and redirect -->
+    <div class="actions stacked">
+      <a class="btn" id="loginBtn"
+         href="https://oauth.deriv.com/oauth2/authorize?app_id=112604&l=EN&response_type=token&redirect_uri=https://kimhubfx.github.io/KIMHUBFX/dashboard.html">
+         Login
+      </a>
 
-    <button onclick="saveToken()" class="btn">Connect</button>
+      <a class="btn ghost" href="index.html">Back to Home</a>
+    </div>
 
-    <p id="msg"></p>
-</div>
-
-<script>
-function saveToken() {
-    let token = document.getElementById("token").value;
-
-    if (token.length < 5) {
-        document.getElementById("msg").innerHTML = "Invalid Token!";
-        return;
-    }
-
-    localStorage.setItem("deriv_token", token);
-    window.location.href = "dashboard.html";
-}
-</script>
-
+    <div class="note">After approving, allow the redirect — you'll land on the dashboard automatically.</div>
+  </main>
 </body>
 </html>
