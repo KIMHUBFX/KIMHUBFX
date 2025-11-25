@@ -1,27 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>KIMHUBFX Dashboard</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>KIMHUBFX • Dashboard</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <header class="topbar">
+    <div class="brand">KIMHUBFX</div>
+    <nav>
+      <a class="navlink" href="index.html">Home</a>
+      <a class="navlink" href="login.html">Login</a>
+      <button class="btn small" id="logoutBtn">Logout</button>
+    </nav>
+  </header>
 
-<div class="container">
-    <h2>KIMHUBFX Dashboard</h2>
+  <main class="center">
+    <section class="card wide">
+      <div class="row">
+        <div>
+          <h3>Account Balance</h3>
+          <div id="balanceBox" class="big">—</div>
+        </div>
 
-    <div id="balanceBox">Balance: --</div>
+        <div>
+          <h3>Connection</h3>
+          <div id="status" class="status waiting">Waiting for connection...</div>
+        </div>
+      </div>
+    </section>
 
-    <h3>R_100 Live Price</h3>
-    <div id="tickBox">---</div>
+    <section class="card">
+      <h3>R_100 Live Price</h3>
+      <div id="tickBox" class="tick">—</div>
+      <div id="tickTime" class="muted">—</div>
+    </section>
 
-    <h3>Status</h3>
-    <div id="status">Loading token...</div>
+    <section class="card">
+      <h3>History (events)</h3>
+      <div id="history" class="history">No events yet</div>
+    </section>
+  </main>
 
-    <button class="btn" onclick="logout()">Logout</button>
-</div>
-
-<script src="app.js"></script>
-
+  <script src="app.js"></script>
+  <script>
+    // attach logout button
+    document.getElementById('logoutBtn').addEventListener('click', () => {
+      logout();
+    });
+  </script>
 </body>
 </html>
