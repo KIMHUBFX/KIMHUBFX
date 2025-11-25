@@ -1,75 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>KIMHUBFX – Welcome</title>
-
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: #0e0f1a; /* Deriv dark background */
-            color: #ffffff;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            padding: 0;
-            text-align: center;
-        }
-
-        h2 {
-            font-size: 28px;
-            color: #ff444f; /* Deriv red */
-            margin-bottom: 10px;
-        }
-
-        p {
-            color: #d3d3d3;
-            margin-bottom: 30px;
-        }
-
-        .btn {
-            display: block;
-            width: 260px;
-            padding: 15px;
-            margin: 10px 0;
-            border-radius: 6px;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 16px;
-            text-align: center;
-        }
-
-        .primary {
-            background: #ff444f; /* Deriv red */
-            color: white;
-        }
-
-        .secondary {
-            background: #85acb0; /* Deriv soft grey */
-            color: #0e0f1a;
-        }
-    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KIMHUBFX</title>
+    <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-    <h2>Welcome to KIMHUBFX</h2>
-    <p>Select an option to continue</p>
+    <!-- TOP HEADER BAR (DERIV RED) -->
+    <header class="top-bar">
+        <h2>KIMHUBFX</h2>
+    </header>
 
-    <!-- LOGIN BUTTON -->
-    <a class="btn primary"
-       href="https://oauth.deriv.com/oauth2/authorize?app_id=112604&redirect_uri=https://kimhubfx.github.io/kimhubfx/redirect.html">
-       Login
-    </a>
+    <!-- MAIN CENTERED CONTAINER -->
+    <div class="container">
+        <h1>Welcome to KIMHUBFX</h1>
+        <p>Select an option to continue</p>
 
-    <!-- CREATE ACCOUNT BUTTON -->
-    <a class="btn secondary"
-       href="https://deriv.com/signup/?ref=kimhubfx&tag=affiliate">
-       Create Account
-    </a>
+        <button class="main-btn" onclick="window.location.href='login.html'">
+            Login
+        </button>
+
+        <button class="main-btn" onclick="window.location.href='https://app.deriv.com/signup/'">
+            Create Account
+        </button>
+    </div>
 
 </body>
 </html>
