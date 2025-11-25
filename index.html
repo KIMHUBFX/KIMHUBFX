@@ -8,7 +8,7 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background: #0f1d4a;
+            background: #0e0e0e;
             color: white;
             display: flex;
             justify-content: center;
@@ -18,36 +18,50 @@
             text-align: center;
         }
         .box {
-            background: #13235c;
+            background: #151515;
             padding: 40px;
-            border-radius: 10px;
+            border-radius: 12px;
             width: 90%;
-            max-width: 350px;
+            max-width: 360px;
+            box-shadow: 0 0 20px rgba(255, 68, 79, 0.3);
+            border-top: 4px solid #ff444f;
+        }
+        h2 {
+            margin-bottom: 10px;
+            font-weight: bold;
         }
         .btn {
             display: block;
             width: 100%;
             padding: 15px;
-            margin-top: 10px;
+            margin-top: 15px;
             border-radius: 8px;
             text-decoration: none;
             font-weight: bold;
+            font-size: 16px;
         }
         .primary {
-            background: #0098ff;
-            color: white;
+            background: #ff444f;
+            color: #ffffff;
+        }
+        .primary:hover {
+            background: #e0333f;
         }
         .secondary {
-            background: #00c853;
-            color: white;
+            background: #2e2e2e;
+            color: #ffffff;
+            border: 1px solid #ff444f;
+        }
+        .secondary:hover {
+            background: #3b3b3b;
         }
     </style>
 </head>
 <body>
 
 <div class="box">
-    <h2>Welcome to KIMHUBFX</h2>
-    <p>Select an option to continue:</p>
+    <h2>KIMHUBFX</h2>
+    <p>Choose an option to continue:</p>
 
     <!-- LOGIN BUTTON -->
     <a class="btn primary"
