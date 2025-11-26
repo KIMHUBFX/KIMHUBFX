@@ -1,17 +1,46 @@
-<!DOCTYPE html>
-<html>
-<head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>Wallet</title>
-<link rel="stylesheet" href="style.css" /></head>
-<body>
-  <div id="sidebar" class="sidebar"><div class="side-inner"><h2>KIMHUBFX</h2></div></div>
-  <header class="topbar"><div class="left"><button class="icon-btn" onclick="appUI.openMenu()">☰</button><span class="logo">KIMHUBFX</span></div><div id="authContainer" class="auth-buttons"></div></header>
-  <nav class="horizontal-menu"><div class="menu-item" onclick="location.href='dashboard.html'">Dashboard</div><div class="menu-item" onclick="location.href='bot-builder.html'">Bot Builder</div><div class="menu-item" onclick="location.href='dtrader.html'">DTrader</div><div class="menu-item" onclick="location.href='analysis-tool.html'">Analysis Tool</div><div class="menu-item" onclick="location.href='dp-tool.html'">DP Tool</div><div class="menu-item" onclick="location.href='freebots.html'">FreeBots</div><div class="menu-item active">Wallet</div></nav>
+<div class="page-section">
+    <h2>Wallet</h2>
 
-  <main class="container">
-    <div class="card"><h2>Wallet</h2><p class="muted">Deposit & Withdraw — login required to perform transactions.</p></div>
-  </main>
+    <div class="card">
+        <p class="muted">
+            Your Deriv wallet summary will appear here once connected.
+        </p>
 
-  <script src="menu.js"></script>
-  <script>document.addEventListener('DOMContentLoaded', ()=> appUI.renderAuthButtons('authContainer'));</script>
-</body>
-</html>
+        <div class="wallet-box">
+            <div class="wallet-item">
+                <label>Account Balance:</label>
+                <span id="walletBalance">$0.00</span>
+            </div>
+
+            <div class="wallet-item">
+                <label>Currency:</label>
+                <span id="walletCurrency">USD</span>
+            </div>
+
+            <div class="wallet-item">
+                <label>Account ID:</label>
+                <span id="walletID">---</span>
+            </div>
+
+            <button class="btn" onclick="refreshWallet()">Refresh Wallet</button>
+        </div>
+    </div>
+
+    <div class="card">
+        <h3>Deposit / Withdraw</h3>
+        <p class="muted">You can automate this section later.</p>
+
+        <div class="wallet-actions">
+            <button class="btn">Deposit</button>
+            <button class="btn">Withdraw</button>
+        </div>
+    </div>
+</div>
+
+<script>
+function refreshWallet() {
+    // When you connect Deriv API, update wallet here
+    document.getElementById("walletBalance").innerText = "$105.50";
+    document.getElementById("walletID").innerText = "CR1234567";
+}
+</script>
