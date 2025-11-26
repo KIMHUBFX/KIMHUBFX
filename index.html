@@ -19,6 +19,7 @@
             padding: 15px;
             font-size: 22px;
             font-weight: bold;
+
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -29,24 +30,21 @@
             cursor: pointer;
         }
 
-        /* Horizontal menu */
-        .tabs {
+        /* Right-side tabs */
+        .right-tabs {
             display: flex;
-            background: white;
-            padding: 10px 5px;
             gap: 10px;
-            overflow-x: auto;
-            white-space: nowrap;
-            border-bottom: 1px solid #ccc;
         }
 
         .tab {
-            padding: 8px 14px;
-            background: #ff444f;
-            color: white;
-            border-radius: 6px;
-            font-size: 15px;
+            padding: 6px 12px;
+            background: white;
+            color: #ff444f;
+            border-radius: 4px;
+            font-size: 14px;
             cursor: pointer;
+            font-weight: bold;
+            white-space: nowrap;
         }
 
         /* Main box */
@@ -75,20 +73,19 @@
 </head>
 <body>
 
-    <!-- Top bar -->
+    <!-- Top bar with tabs on right -->
     <div class="top-bar">
         <span class="menu-btn">☰</span>
-        KIMHUBFX
-        <span></span>
-    </div>
 
-    <!-- Horizontal menu -->
-    <div class="tabs">
-        <div class="tab">Dashboard</div>
-        <div class="tab">DP Tool</div>
-        <div class="tab">Strategies</div>
-        <div class="tab">Analysis</div>
-        <div class="tab">Free Bots</div>
+        <span>KIMHUBFX</span>
+
+        <div class="right-tabs">
+            <div class="tab">Dashboard</div>
+            <div class="tab">DP Tool</div>
+            <div class="tab">Strategies</div>
+            <div class="tab">Analysis</div>
+            <div class="tab">Free Bots</div>
+        </div>
     </div>
 
     <!-- Main section -->
@@ -96,10 +93,7 @@
         <h2>Welcome to KIMHUBFX</h2>
         <p>Please choose an option</p>
 
-        <!-- LOGIN BUTTON -->
         <button class="btn" onclick="loginWithDeriv()">Login</button>
-
-        <!-- CREATE ACCOUNT BUTTON -->
         <button class="btn" onclick="createAccount()">Create Account</button>
     </div>
 
@@ -117,10 +111,7 @@
         }
 
         function createAccount() {
-            // Your Deriv referral link
-            const refLink = "https://app.deriv.com/signup/?ref=kimhubfx";
-
-            window.location.href = refLink;
+            window.location.href = "https://app.deriv.com/signup/?ref=kimhubfx";
         }
     </script>
 
