@@ -1,17 +1,56 @@
-<!DOCTYPE html>
-<html>
-<head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>DTrader</title>
-<link rel="stylesheet" href="style.css" /></head>
-<body>
-  <div id="sidebar" class="sidebar"><div class="side-inner"><h2>KIMHUBFX</h2></div></div>
-  <header class="topbar"><div class="left"><button class="icon-btn" onclick="appUI.openMenu()">☰</button><span class="logo">KIMHUBFX</span></div><div id="authContainer" class="auth-buttons"></div></header>
-  <nav class="horizontal-menu"><div class="menu-item" onclick="location.href='dashboard.html'">Dashboard</div><div class="menu-item" onclick="location.href='bot-builder.html'">Bot Builder</div><div class="menu-item active">DTrader</div><div class="menu-item" onclick="location.href='analysis-tool.html'">Analysis Tool</div><div class="menu-item" onclick="location.href='dp-tool.html'">DP Tool</div><div class="menu-item" onclick="location.href='freebots.html'">FreeBots</div></nav>
+<div class="page-section">
+    <h2>DTrader</h2>
 
-  <main class="container">
-    <div class="card"><h2>DTrader</h2><p class="muted">Trading panel — login to enable execution.</p></div>
-  </main>
+    <div class="card">
+        <p class="muted">
+            This is the DTrader section where users can run manual trades,
+            view price ticks, and execute contracts.
+        </p>
 
-  <script src="menu.js"></script>
-  <script>document.addEventListener('DOMContentLoaded', ()=> appUI.renderAuthButtons('authContainer'));</script>
-</body>
-</html>
+        <div class="trade-row">
+            <label>Select Market:</label>
+            <select id="dtMarket">
+                <option>Volatility 10</option>
+                <option>Volatility 25</option>
+                <option>Volatility 50</option>
+                <option>Volatility 75</option>
+                <option>Volatility 100</option>
+            </select>
+        </div>
+
+        <div class="trade-row">
+            <label>Contract Type:</label>
+            <select id="dtContract">
+                <option>Rise</option>
+                <option>Fall</option>
+                <option>Even</option>
+                <option>Odd</option>
+            </select>
+        </div>
+
+        <div class="trade-row">
+            <label>Stake:</label>
+            <input type="number" id="dtStake" value="1">
+        </div>
+
+        <button class="btn" onclick="dtTrade()">Trade</button>
+
+        <div id="dtStatus" class="results-box"></div>
+    </div>
+</div>
+
+<script>
+function dtTrade() {
+    const market = document.getElementById('dtMarket').value;
+    const contract = document.getElementById('dtContract').value;
+    const stake = document.getElementById('dtStake').value;
+
+    document.getElementById('dtStatus').innerHTML = `
+        <h4>Trade Summary</h4>
+        <p>Market: <b>${market}</b></p>
+        <p>Contract: <b>${contract}</b></p>
+        <p>Stake: <b>${stake}</b> USD</p>
+        <p class="muted">You can connect this to Deriv API later.</p>
+    `;
+}
+</script>
