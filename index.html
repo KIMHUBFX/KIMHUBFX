@@ -42,7 +42,7 @@
 <!-- HORIZONTAL MENU -->
 <nav class="horizontal-menu">
   <div onclick="loadPage('dashboard.html')">Dashboard</div>
-  <div onclick="loadPage('botbuilder.html')">Bot Builder</div>
+  <div onclick="loadPage('bot-builder.html')">Bot Builder</div>
   <div onclick="loadPage('freebots.html')">FreeBots</div>
   <div onclick="loadPage('analysis-tool.html')">Analysis Tool</div>
   <div onclick="loadPage('analysis.html')">Analysis</div>
@@ -53,7 +53,7 @@
 
 <!-- PAGE CONTENT -->
 <main class="container" id="pageContent">
-  <!-- content loads here -->
+  Loading...
 </main>
 
 <script src="menu.js"></script>
@@ -68,7 +68,7 @@ function loadPage(page) {
     });
 }
 
-// Load Dashboard by default
+// Load dashboard automatically when site opens
 document.addEventListener("DOMContentLoaded", () => {
     appUI.renderAuthButtons('authContainer');
     loadPage("dashboard.html");
