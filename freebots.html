@@ -1,38 +1,24 @@
-<!DOCTYPE html>
-<html>
-<head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>FreeBots</title>
-<link rel="stylesheet" href="style.css" /></head>
-<body>
-  <div id="sidebar" class="sidebar"><div class="side-inner"><h2>KIMHUBFX</h2></div></div>
-  <header class="topbar"><div class="left"><button class="icon-btn" onclick="appUI.openMenu()">☰</button><span class="logo">KIMHUBFX</span></div><div id="authContainer" class="auth-buttons"></div></header>
-  <nav class="horizontal-menu"><div class="menu-item" onclick="location.href='dashboard.html'">Dashboard</div><div class="menu-item" onclick="location.href='bot-builder.html'">Bot Builder</div><div class="menu-item" onclick="location.href='dtrader.html'">DTrader</div><div class="menu-item" onclick="location.href='analysis-tool.html'">Analysis Tool</div><div class="menu-item" onclick="location.href='dp-tool.html'">DP Tool</div><div class="menu-item active">FreeBots</div></nav>
+<div class="page-section">
+    <h2>Free Bots</h2>
 
-  <main class="container">
-    <div class="card">
-      <h2>Free Bots</h2>
-      <div id="freebotsList" class="freebots-grid">
+    <div class="freebots-grid">
+
+        <!-- SAMPLE BOT CARD -->
         <div class="freebot-card">
-          <h4>Even/Odd Bot</h4>
-          <p class="muted">Basic even/odd strategy</p>
-          <button class="btn" onclick="openBot('evenodd')">Open</button>
+            <h3>Even / Odd Bot</h3>
+            <p class="muted">Simple even/odd last-digit strategy.</p>
+            <button class="btn" onclick="alert('Open Even/Odd Bot')">Open Bot</button>
         </div>
+
+        <!-- ADD MORE BOTS HERE -->
+        <!-- Just copy this block to add a new bot -->
+        <!--
         <div class="freebot-card">
-          <h4>Martingale Bot</h4>
-          <p class="muted">Staircase martingale</p>
-          <button class="btn" onclick="openBot('martingale')">Open</button>
+            <h3>Bot Name</h3>
+            <p class="muted">Short description here.</p>
+            <button class="btn">Open Bot</button>
         </div>
-      </div>
+        -->
+
     </div>
-  </main>
-
-  <script src="menu.js"></script>
-  <script>
-    document.addEventListener('DOMContentLoaded', ()=> appUI.renderAuthButtons('authContainer'));
-    function openBot(id){
-      if(!appUI.isLoggedIn()){ alert('Please login to use this bot.'); window.location.href='index.html'; return; }
-      alert('Opening bot: '+id);
-      // open bot editor or run
-    }
-  </script>
-</body>
-    </html>
+</div>
