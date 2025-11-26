@@ -1,41 +1,38 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Redirecting...</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            padding-top: 60px;
-        }
-    </style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Redirecting...</title>
+  <style>body{font-family:Arial;text-align:center;padding-top:60px}</style>
 </head>
 <body>
+  <h2>Processing login...</h2>
+  <p>Please wait…</p>
+  <script>
+    // Extract token from URL hash (#token=...)
+    const hash = window.location.hash.substring(1);
+    const params = new URLSearchParams(hash);
+    const token = params.get('token') || params.get('access_token') || null;
 
-    <h2>Redirecting...</h2>
-    <p>Please wait...</p>
-
-    <script>
-        // Extract token from URL hash (#)
-        const hash = window.location.hash.substring(1); 
-        const params = new URLSearchParams(hash);
-        const token = params.get("token");
-
-        if (token) {
-            localStorage.setItem("auth_token", token);
-            window.location.href = "dashboard.html";
-        } else {
-            document.body.innerHTML = `
-                <h2>No token received ❌</h2>
-                <p>Please login again.</p>
-            `;
-            setTimeout(() => {
-                window.location.href = "login.html";
-            }, 2000);
-        }
-    </script>
-
+    if(token){
+      localStorage.setItem('auth_token', token);
+      // optional: set a demo balance (remove in production)
+      localStorage.setItem('fake_balance', '0.00');
+      // go to dashboard
+      window.location.href = 'dashboard.html';
+    } else {
+      // maybe Deriv returned token as query param - check both
+      const query = new URLSearchParams(window.location.search);
+      const qtoken = query.get('token') || query.get('access_token');
+      if(qtoken){
+        localStorage.setItem('auth_token', qtoken);
+        localStorage.setItem('fake_balance', '0.00');
+        window.location.href = 'dashboard.html';
+      } else {
+        document.body.innerHTML = '<h3>No token received</h3><p>Please go back and login again.</p>';
+      }
+    }
+  </script>
 </body>
 </html>
