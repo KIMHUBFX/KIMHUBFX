@@ -1,11 +1,26 @@
+<!DOCTYPE html>
+<html>
+<body style="font-family: Arial; text-align:center; margin-top:50px;">
+
+<h2>Redirecting...</h2>
+<p>Please wait...</p>
+
 <script>
+    // Extract token from URL
     const urlParams = new URLSearchParams(window.location.search);
     const token = urlParams.get("token");
 
     if (token) {
-        localStorage.setItem("authToken", token);
+        // Save token
+        localStorage.setItem("auth_token", token);
+
+        // Go to dashboard
         window.location.href = "dashboard.html";
     } else {
-        document.body.innerHTML = "<h2>No token found</h2>";
+        document.body.innerHTML = "<h3>No token received. Please login again.</h3>";
+        setTimeout(() => window.location.href = "login.html", 2000);
     }
 </script>
+
+</body>
+</html>
