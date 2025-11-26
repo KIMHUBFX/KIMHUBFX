@@ -9,129 +9,119 @@
         body {
             margin: 0;
             font-family: Arial, sans-serif;
-            background: #f5f5f5;
+            background: #f3f3f3;
         }
 
-        /* Top Bar */
-        .topbar {
-            background: #ff4d4d;
+        /* Top bar */
+        .top-bar {
+            background: #ff444f; /* Deriv color */
             color: white;
             padding: 15px;
-            display: flex;
-            align-items: center;
             font-size: 22px;
             font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
         .menu-btn {
-            font-size: 28px;
-            margin-right: 15px;
+            font-size: 26px;
             cursor: pointer;
         }
 
-        /* Left Slide Menu */
-        .side-menu {
-            width: 260px;
-            height: 100%;
-            background: white;
-            position: fixed;
-            top: 0;
-            left: -260px;
-            transition: 0.3s;
-            padding-top: 20px;
-            box-shadow: 2px 0 6px rgba(0,0,0,0.2);
-        }
-
-        .side-menu h2 {
-            text-align: center;
-            color: #ff4d4d;
-        }
-
-        .side-menu a {
-            display: block;
-            padding: 15px;
-            color: black;
-            text-decoration: none;
-            border-bottom: 1px solid #eee;
-            font-size: 18px;
-        }
-
-        .side-menu a:hover {
-            background: #ffe6e6;
-        }
-
-        /* Horizontal Menu */
-        .nav-scroll {
+        /* Horizontal menu */
+        .tabs {
             display: flex;
-            overflow-x: auto;
             background: white;
-            border-bottom: 1px solid #ddd;
+            padding: 10px 5px;
+            gap: 10px;
+            overflow-x: auto;
             white-space: nowrap;
+            border-bottom: 1px solid #ccc;
         }
 
-        .nav-scroll div {
-            padding: 14px 25px;
-            font-size: 16px;
+        .tab {
+            padding: 8px 14px;
+            background: #ff444f;
+            color: white;
+            border-radius: 6px;
+            font-size: 15px;
             cursor: pointer;
-            flex-shrink: 0;
         }
 
-        .nav-scroll div:hover {
-            background: #ffefef;
+        /* Main box */
+        .center-box {
+            margin: 60px auto;
+            width: 90%;
+            max-width: 400px;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
         }
 
+        .btn {
+            width: 100%;
+            padding: 15px;
+            margin: 12px 0;
+            background: #ff444f;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 18px;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
 
-    <!-- LEFT MENU -->
-    <div id="sideMenu" class="side-menu">
-        <h2>KIMHUBFX</h2>
-
-        <!-- Menu Links -->
-        <a href="#">Account Settings</a>
-        <a href="#">Cashier</a>
-        <a href="#">Dark Theme</a>
-
-        <!-- Channels -->
-        <a href="https://www.youtube.com/@kimhtai" target="_blank">YouTube</a>
-        <a href="https://t.me/kimhubfx" target="_blank">Telegram</a>
-        <a href="https://www.tiktok.com/@kimh.tai" target="_blank">TikTok</a>
-        <a href="https://www.instagram.com/kimh.tai" target="_blank">Instagram</a>
-        <a href="https://www.facebook.com/profile.php?id=61582999149557" target="_blank">Facebook</a>
-        <a href="https://whatsapp.com/channel/0029Vb77BD8B4hdNphlldH3g" target="_blank">WhatsApp Channel</a>
-        <a href="https://wa.me/message/ZPIOXNGV3YSEM1" target="_blank">DM on WhatsApp</a>
-    </div>
-
-    <!-- TOP BAR -->
-    <div class="topbar">
-        <span class="menu-btn" onclick="openMenu()">☰</span>
+    <!-- Top bar -->
+    <div class="top-bar">
+        <span class="menu-btn">☰</span>
         KIMHUBFX
+        <span></span>
     </div>
 
-    <!-- HORIZONTAL MENU -->
-    <div class="nav-scroll">
-        <div>Dashboard</div>
-        <div>Bot Builder</div>
-        <div>DTrader</div>
-        <div>Analysis Tool</div>
-        <div>DP Tool</div>
-        <div>Analysis</div>
-        <div>FreeBots</div>
+    <!-- Horizontal menu -->
+    <div class="tabs">
+        <div class="tab">Dashboard</div>
+        <div class="tab">DP Tool</div>
+        <div class="tab">Strategies</div>
+        <div class="tab">Analysis</div>
+        <div class="tab">Free Bots</div>
+    </div>
+
+    <!-- Main section -->
+    <div class="center-box">
+        <h2>Welcome to KIMHUBFX</h2>
+        <p>Please choose an option</p>
+
+        <!-- LOGIN BUTTON -->
+        <button class="btn" onclick="loginWithDeriv()">Login</button>
+
+        <!-- CREATE ACCOUNT BUTTON -->
+        <button class="btn" onclick="createAccount()">Create Account</button>
     </div>
 
     <script>
-        function openMenu() {
-            document.getElementById("sideMenu").style.left = "0px";
+        function loginWithDeriv() {
+            const redirectURL = "https://kimhubfx.github.io/kimhubfx/redirect.html";
+
+            const loginURL = 
+                "https://oauth.deriv.com/oauth2/authorize" +
+                "?app_id=112604" +
+                "&force_login=1" +
+                "&redirect_uri=" + encodeURIComponent(redirectURL);
+
+            window.location.href = loginURL;
         }
 
-        // Close menu when clicking outside
-        document.addEventListener("click", function(e) {
-            if (!document.getElementById("sideMenu").contains(e.target) &&
-                !e.target.classList.contains("menu-btn")) {
-                document.getElementById("sideMenu").style.left = "-260px";
-            }
-        });
+        function createAccount() {
+            // Your Deriv referral link
+            const refLink = "https://app.deriv.com/signup/?ref=kimhubfx";
+
+            window.location.href = refLink;
+        }
     </script>
 
 </body>
