@@ -4,19 +4,21 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>KIMHUBFX • Dashboard</title>
-  <link rel="stylesheet" href="/kimhubfx/style.css" />
+
+  <!-- FIXED: Removed leading "/" -->
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <nav class="top-nav">
-    <a class="nav-left brand" href="/kimhubfx/index.html">KIMHUBFX</a>
+    <a class="nav-left brand" href="index.html">KIMHUBFX</a>
 
     <div class="nav-right">
       <a class="nav-btn inactive" id="dp-tool">DP Tool</a>
-      <a class="nav-btn" href="/kimhubfx/strategies.html">Strategies</a>
+      <a class="nav-btn" href="strategies.html">Strategies</a>
       <a class="nav-btn" href="https://www.tradingview.com/chart/" target="_blank" rel="noopener">Analysis</a>
-      <a class="nav-btn" href="/kimhubfx/freebots.html">Free Bots</a>
+      <a class="nav-btn" href="freebots.html">Free Bots</a>
+      <a class="nav-btn" href="wallet.html">Deposit / Withdraw</a>
 
-      <a class="nav-btn" href="/kimhubfx/wallet.html">Deposit / Withdraw</a>
       <span id="accountBox" class="account-box">—</span>
       <button id="logoutBtn" class="btn small">Logout</button>
     </div>
@@ -49,7 +51,9 @@
     </section>
   </main>
 
-  <script src="/kimhubfx/app.js"></script>
+  <!-- FIXED: Removed leading "/" -->
+  <script src="app.js"></script>
+
   <script>
     // DP Tool inactive behavior
     document.getElementById('dp-tool').addEventListener('click', (e) => {
