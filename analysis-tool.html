@@ -3,24 +3,43 @@
 
     <div class="card">
         <p class="muted">
-            Your analysis tools will appear here.  
-            You can add indicators, charts, signals, calculators, etc.
+            This tool helps you analyze the market, detect patterns, and view indicators.
+            You can expand it with charts or custom logic later.
         </p>
 
-        <!-- Example tool blocks (editable/remove anytime) -->
-        <div class="tool-block">
-            <h4>📊 Volatility Strength Meter</h4>
-            <p>Shows current strength of volatility indices.</p>
+        <div class="analysis-box">
+
+            <label>Select Market:</label>
+            <select id="analysisMarket" class="input">
+                <option value="R_100">Volatility 100 Index</option>
+                <option value="R_75">Volatility 75 Index</option>
+                <option value="R_50">Volatility 50 Index</option>
+                <option value="BOOM">Boom Indices</option>
+                <option value="CRASH">Crash Indices</option>
+            </select>
+
+            <button class="btn" onclick="startAnalysis()">Start Analysis</button>
         </div>
 
-        <div class="tool-block">
-            <h4>📉 Trend Calculator</h4>
-            <p>Analyze trend direction based on configurable parameters.</p>
+        <div class="card">
+            <h3>Live Analysis Output</h3>
+            <pre id="analysisOutput" class="muted">Waiting for analysis…</pre>
         </div>
 
-        <div class="tool-block">
-            <h4>🧮 Risk Calculator</h4>
-            <p>Helps you manage risks and calculate stake sizes.</p>
-        </div>
     </div>
 </div>
+
+<script>
+function startAnalysis() {
+    const market = document.getElementById("analysisMarket").value;
+
+    document.getElementById("analysisOutput").innerText =
+        `Starting analysis for ${market}...\n(Placeholder engine — add your logic later)`;
+
+    // Add later:
+    // - Trend scanner
+    // - Candle pattern detector
+    // - Volatility heatmap
+    // - Trade signal generator
+}
+</script>
