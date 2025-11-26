@@ -8,7 +8,6 @@
 </head>
 <body>
 
-<!-- SIDEBAR -->
 <div id="sidebar" class="sidebar">
   <div class="side-inner">
     <h2>KIMHUBFX</h2>
@@ -25,11 +24,12 @@
     <a href="https://t.me/kimhubfx" target="_blank">Telegram</a>
     <a href="https://www.instagram.com/kimh.tai" target="_blank">Instagram</a>
     <a href="https://www.facebook.com/profile.php?id=61582999149557" target="_blank">Facebook</a>
-    <a href="https://wa.me/message/ZPIOXNGV3YSEM1" target="_blank">WhatsApp DM</a>
+
+    <!-- UPDATED WHATSAPP DM -->
+    <a href="https://wa.me/254724753475" target="_blank">WhatsApp DM</a>
   </div>
 </div>
 
-<!-- TOP BAR -->
 <header class="topbar">
   <div class="left">
     <button class="icon-btn" onclick="appUI.openMenu()">☰</button>
@@ -38,7 +38,6 @@
   <div id="authContainer" class="auth-buttons"></div>
 </header>
 
-<!-- HORIZONTAL MENU -->
 <nav class="horizontal-menu">
   <div onclick="location.href='dashboard.html'">Dashboard</div>
   <div onclick="location.href='bot-builder.html'">Bot Builder</div>
@@ -50,22 +49,14 @@
   <div onclick="location.href='wallet.html'">Wallet</div>
 </nav>
 
-<!-- MAIN CONTENT -->
 <main class="container">
   <h2>Dashboard</h2>
-
-  <div class="card">
-    <p>Dashboard content here…</p>
-  </div>
+  <div class="card">Dashboard content here…</div>
 </main>
 
-<!-- SCRIPTS -->
 <script src="menu.js"></script>
 <script>
-document.addEventListener("DOMContentLoaded", () => {
-  appUI.renderAuthButtons('authContainer');
-});
+document.addEventListener("DOMContentLoaded", () => appUI.renderAuthButtons('authContainer'));
 </script>
-
 </body>
 </html>
