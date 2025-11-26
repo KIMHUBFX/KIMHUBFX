@@ -1,77 +1,80 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>KIMHUBFX • Dashboard</title>
-<link rel="stylesheet" href="style.css" />
-</head>
-<body>
-  <div id="sidebar" class="sidebar">
-    <div class="side-inner">
-      <h2>KIMHUBFX</h2>
-      <div class="section-title">Account</div>
-      <a href="#">Account Settings</a>
-      <a href="#">Cashier</a>
-      <a href="#" onclick="alert('Toggle theme')">Dark Theme</a>
+<div id="sidebar" class="sidebar">
+  <div class="side-inner">
+    <h2>KIMHUBFX</h2>
 
-      <div class="section-title">Channels</div>
-      <a href="https://whatsapp.com/channel/0029Vb77BD8B4hdNphlldH3g" target="_blank">WhatsApp Channel</a>
-      <a href="https://www.youtube.com/@kimhtai" target="_blank">YouTube</a>
-      <a href="https://www.tiktok.com/@kimh.tai?_r=1&_t=ZM-91izOAFB0g7" target="_blank">TikTok</a>
-      <a href="https://t.me/kimhubfx" target="_blank">Telegram</a>
-      <a href="https://www.instagram.com/kimh.tai?igsh=c3ZucHNnOHdpMXM4" target="_blank">Instagram</a>
-      <a href="https://www.facebook.com/profile.php?id=61582999149557" target="_blank">Facebook</a>
-      <a href="https://wa.me/message/ZPIOXNGV3YSEM1" target="_blank">WhatsApp DM</a>
+    <div class="section-title">Account</div>
+    <a href="#">Account Settings</a>
+    <a href="#">Cashier</a>
+    <a href="#" onclick="alert('Toggle theme')">Dark Theme</a>
+
+    <!-- TOGGLE BUTTON -->
+    <button id="toggleSources" style="
+      margin-top:15px;
+      width:100%;
+      padding:10px;
+      border:none;
+      background:#ff4d4d;
+      color:white;
+      font-weight:bold;
+      border-radius:6px;
+      cursor:pointer;">
+      Hide Sources
+    </button>
+
+    <!-- SOCIAL ICON LINKS -->
+    <div id="sourceLinks">
+
+      <div class="section-title">Sources</div>
+
+      <a href="https://whatsapp.com/channel/0029Vb77BD8B4hdNphlldH3g" target="_blank">
+        <img src="https://img.icons8.com/?size=24&id=16713&format=png" class="icon"> WhatsApp Channel
+      </a>
+
+      <a href="https://www.youtube.com/@kimhtai" target="_blank">
+        <img src="https://img.icons8.com/?size=24&id=19318&format=png" class="icon"> YouTube
+      </a>
+
+      <a href="https://www.tiktok.com/@kimh.tai?_r=1&_t=ZM-91izOAFB0g7" target="_blank">
+        <img src="https://img.icons8.com/?size=24&id=118638&format=png" class="icon"> TikTok
+      </a>
+
+      <a href="https://t.me/kimhubfx" target="_blank">
+        <img src="https://img.icons8.com/?size=24&id=63306&format=png" class="icon"> Telegram
+      </a>
+
+      <a href="https://www.instagram.com/kimh.tai?igsh=c3ZucHNnOHdpMXM4" target="_blank">
+        <img src="https://img.icons8.com/?size=24&id=32292&format=png" class="icon"> Instagram
+      </a>
+
+      <a href="https://www.facebook.com/profile.php?id=61582999149557" target="_blank">
+        <img src="https://img.icons8.com/?size=24&id=118497&format=png" class="icon"> Facebook
+      </a>
+
+      <a href="https://wa.me/message/ZPIOXNGV3YSEM1" target="_blank">
+        <img src="https://img.icons8.com/?size=24&id=16713&format=png" class="icon"> WhatsApp DM
+      </a>
+
     </div>
   </div>
+</div>
 
-  <header class="topbar">
-    <div class="left"><button class="icon-btn" onclick="appUI.openMenu()">☰</button><span class="logo">KIMHUBFX</span></div>
-    <div id="authContainer" class="auth-buttons"></div>
-  </header>
+<style>
+  .icon {
+    width: 20px;
+    height: 20px;
+    vertical-align: middle;
+    margin-right: 8px;
+  }
+</style>
 
-  <nav class="horizontal-menu">
-    <div class="menu-item" data-tab="dashboard">Dashboard</div>
-    <div class="menu-item" data-tab="botbuilder" onclick="location.href='bot-builder.html'">Bot Builder</div>
-    <div class="menu-item" data-tab="dtrader" onclick="location.href='dtrader.html'">DTrader</div>
-    <div class="menu-item" data-tab="analysis-tool" onclick="location.href='analysis-tool.html'">Analysis Tool</div>
-    <div class="menu-item" data-tab="dptool" onclick="location.href='dp-tool.html'">DP Tool</div>
-    <div class="menu-item" data-tab="freebots" onclick="location.href='freebots.html'">FreeBots</div>
-    <div class="menu-item" data-tab="wallet" onclick="location.href='wallet.html'">Wallet</div>
-  </nav>
+<script>
+  const btn = document.getElementById("toggleSources");
+  const box = document.getElementById("sourceLinks");
+  let hidden = false;
 
-  <main class="container">
-    <div class="card balance-box">
-      <div>Account:</div><div id="accountId" style="font-weight:900;padding-left:8px">—</div>
-      <div style="width:18px"></div>
-      <div>Balance:</div><div id="balanceVal" style="font-weight:900;padding-left:8px">—</div>
-    </div>
-
-    <div class="card">
-      <h3>R_100 Live Price</h3>
-      <div id="tickBox" class="muted">—</div>
-      <div id="tickTime" class="muted">—</div>
-    </div>
-
-    <div class="card">
-      <h3>Event History</h3>
-      <div id="history" class="muted">No events yet</div>
-    </div>
-  </main>
-
-  <script src="menu.js"></script>
-  <script>
-    document.addEventListener('DOMContentLoaded', ()=>{
-      appUI.renderAuthButtons('authContainer');
-      // require auth to view dashboard
-      if(!appUI.ensureAuth(true)) return;
-      // show fake details (will replace with real Deriv API later)
-      const acct = localStorage.getItem('demo_account') || 'CR123456';
-      const bal = localStorage.getItem('fake_balance') || '0.00';
-      document.getElementById('accountId').innerText = acct;
-      document.getElementById('balanceVal').innerText = 'USD ' + bal;
-    });
-  </script>
-</body>
-</html>
+  btn.onclick = () => {
+    hidden = !hidden;
+    box.style.display = hidden ? "none" : "block";
+    btn.innerText = hidden ? "Show Sources" : "Hide Sources";
+  };
+</script>
