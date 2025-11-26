@@ -3,29 +3,68 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login • KIMHUBFX</title>
+    <title>KIMHUBFX Login</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f4f4f4;
+            text-align: center;
+        }
+        .header {
+            background: #ff4d4d;
+            padding: 20px;
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .container {
+            margin-top: 60px;
+        }
+        button {
+            width: 80%;
+            padding: 15px;
+            margin: 10px 0;
+            border: none;
+            background: #ff4d4d;
+            color: white;
+            font-size: 20px;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+    </style>
 </head>
-<body style="text-align:center; font-family:Arial; margin-top:60px;">
+<body>
 
-<h2>Connecting to Deriv...</h2>
+    <div class="header">KIMHUBFX</div>
 
-<script>
-  // YOUR APP ID
-  const app_id = 112604;
+    <div class="container">
+        <h2>Welcome to KIMHUBFX</h2>
+        <p>Select an option to continue</p>
 
-  // YOUR REDIRECT URL
-  const redirect = "https://kimhubfx.github.io/kimhubfx/redirect.html";
+        <button onclick="loginWithDeriv()">Login</button>
+        <button onclick="createAccount()">Create Account</button>
+    </div>
 
-  // Build OAuth link
-  const url =
-    "https://oauth.deriv.com/oauth2/authorize" +
-    "?app_id=" + app_id +
-    "&l=EN" +
-    "&redirect_uri=" + encodeURIComponent(redirect);
+    <script>
+        function loginWithDeriv() {
+            const redirectURL = "https://kimhubfx.github.io/kimhubfx/redirect.html";
 
-  // Redirect user to Deriv login
-  window.location.href = url;
-</script>
+            // 🚀 FORCE DERIV TO SHOW LOGIN SCREEN EVERY TIME
+            const authURL =
+                "https://oauth.deriv.com/oauth2/authorize" +
+                "?app_id=112604" +
+                "&force_login=1" +
+                "&redirect_uri=" + encodeURIComponent(redirectURL);
+
+            window.location.href = authURL;
+        }
+
+        function createAccount() {
+            window.location.href = "https://app.deriv.com/signup/";
+        }
+    </script>
 
 </body>
 </html>
