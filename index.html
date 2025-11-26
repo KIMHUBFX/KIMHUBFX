@@ -14,12 +14,11 @@
 
         /* Top bar */
         .top-bar {
-            background: #ff444f; /* Deriv color */
+            background: #ff444f;
             color: white;
             padding: 15px;
             font-size: 22px;
             font-weight: bold;
-
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -30,78 +29,82 @@
             cursor: pointer;
         }
 
-        /* Right-side tabs */
-        .right-tabs {
+        /* Login + create account buttons (top right) */
+        .auth-buttons {
             display: flex;
             gap: 10px;
         }
 
-        .tab {
-            padding: 6px 12px;
+        .auth-btn {
             background: white;
             color: #ff444f;
-            border-radius: 4px;
+            padding: 6px 12px;
+            border-radius: 5px;
             font-size: 14px;
-            cursor: pointer;
             font-weight: bold;
-            white-space: nowrap;
+            cursor: pointer;
         }
 
-        /* Main box */
+        /* Horizontal menu BELOW KIMHUBFX */
+        .horizontal-menu {
+            background: white;
+            padding: 12px;
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            border-bottom: 1px solid #ccc;
+        }
+
+        .menu-item {
+            font-weight: bold;
+            color: #ff444f;
+            cursor: pointer;
+        }
+
+        /* Main section */
         .center-box {
             margin: 60px auto;
             width: 90%;
             max-width: 400px;
             background: white;
-            padding: 30px;
+            padding: 25px;
             border-radius: 10px;
             text-align: center;
-        }
-
-        .btn {
-            width: 100%;
-            padding: 15px;
-            margin: 12px 0;
-            background: #ff444f;
-            color: white;
-            border: none;
-            border-radius: 6px;
-            font-size: 18px;
-            cursor: pointer;
         }
     </style>
 </head>
 <body>
 
-    <!-- Top bar with tabs on right -->
+    <!-- TOP BAR -->
     <div class="top-bar">
         <span class="menu-btn">☰</span>
-
         <span>KIMHUBFX</span>
 
-        <div class="right-tabs">
-            <div class="tab">Dashboard</div>
-            <div class="tab">DP Tool</div>
-            <div class="tab">Strategies</div>
-            <div class="tab">Analysis</div>
-            <div class="tab">Free Bots</div>
+        <div class="auth-buttons">
+            <div class="auth-btn" onclick="loginWithDeriv()">Login</div>
+            <div class="auth-btn" onclick="createAccount()">Create Account</div>
         </div>
     </div>
 
-    <!-- Main section -->
+    <!-- HORIZONTAL TABS BELOW KIMHUBFX -->
+    <div class="horizontal-menu">
+        <div class="menu-item">Dashboard</div>
+        <div class="menu-item">DP Tool</div>
+        <div class="menu-item">Strategies</div>
+        <div class="menu-item">Analysis</div>
+        <div class="menu-item">Free Bots</div>
+    </div>
+
+    <!-- MAIN WELCOME BOX -->
     <div class="center-box">
         <h2>Welcome to KIMHUBFX</h2>
-        <p>Please choose an option</p>
-
-        <button class="btn" onclick="loginWithDeriv()">Login</button>
-        <button class="btn" onclick="createAccount()">Create Account</button>
+        <p>Select an option above to continue</p>
     </div>
 
     <script>
         function loginWithDeriv() {
             const redirectURL = "https://kimhubfx.github.io/kimhubfx/redirect.html";
-
-            const loginURL = 
+            const loginURL =
                 "https://oauth.deriv.com/oauth2/authorize" +
                 "?app_id=112604" +
                 "&force_login=1" +
