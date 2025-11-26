@@ -1,80 +1,40 @@
-<div id="sidebar" class="sidebar">
-  <div class="side-inner">
-    <h2>KIMHUBFX</h2>
+<div class="section-title">Channels</div>
 
-    <div class="section-title">Account</div>
-    <a href="#">Account Settings</a>
-    <a href="#">Cashier</a>
-    <a href="#" onclick="alert('Toggle theme')">Dark Theme</a>
+<!-- TOGGLE BUTTON -->
+<button id="toggleSources" onclick="toggleSources()" 
+style="width:90%;margin:10px;border:none;padding:10px;background:#ff4d4d;color:white;font-weight:bold;border-radius:5px;">
+    Show / Hide Sources
+</button>
 
-    <!-- TOGGLE BUTTON -->
-    <button id="toggleSources" style="
-      margin-top:15px;
-      width:100%;
-      padding:10px;
-      border:none;
-      background:#ff4d4d;
-      color:white;
-      font-weight:bold;
-      border-radius:6px;
-      cursor:pointer;">
-      Hide Sources
-    </button>
+<!-- SOURCES WRAPPER -->
+<div id="sourcesBox">
 
-    <!-- SOCIAL ICON LINKS -->
-    <div id="sourceLinks">
+    <a href="https://whatsapp.com/channel/0029Vb77BD8B4hdNphlldH3g" target="_blank">
+        <img src="https://img.icons8.com/color/26/whatsapp.png"> WhatsApp Channel
+    </a>
 
-      <div class="section-title">Sources</div>
+    <a href="https://www.youtube.com/@kimhtai" target="_blank">
+        <img src="https://img.icons8.com/color/26/youtube-play.png"> YouTube
+    </a>
 
-      <a href="https://whatsapp.com/channel/0029Vb77BD8B4hdNphlldH3g" target="_blank">
-        <img src="https://img.icons8.com/?size=24&id=16713&format=png" class="icon"> WhatsApp Channel
-      </a>
+    <a href="https://www.tiktok.com/@kimh.tai" target="_blank">
+        <img src="https://img.icons8.com/ios-filled/26/tiktok--v1.png"> TikTok
+    </a>
 
-      <a href="https://www.youtube.com/@kimhtai" target="_blank">
-        <img src="https://img.icons8.com/?size=24&id=19318&format=png" class="icon"> YouTube
-      </a>
+    <a href="https://t.me/kimhubfx" target="_blank">
+        <img src="https://img.icons8.com/color/26/telegram-app.png"> Telegram
+    </a>
 
-      <a href="https://www.tiktok.com/@kimh.tai?_r=1&_t=ZM-91izOAFB0g7" target="_blank">
-        <img src="https://img.icons8.com/?size=24&id=118638&format=png" class="icon"> TikTok
-      </a>
+    <a href="https://www.instagram.com/kimh.tai" target="_blank">
+        <img src="https://img.icons8.com/color/26/instagram-new.png"> Instagram
+    </a>
 
-      <a href="https://t.me/kimhubfx" target="_blank">
-        <img src="https://img.icons8.com/?size=24&id=63306&format=png" class="icon"> Telegram
-      </a>
+    <a href="https://www.facebook.com/profile.php?id=61582999149557" target="_blank">
+        <img src="https://img.icons8.com/color/26/facebook-new.png"> Facebook
+    </a>
 
-      <a href="https://www.instagram.com/kimh.tai?igsh=c3ZucHNnOHdpMXM4" target="_blank">
-        <img src="https://img.icons8.com/?size=24&id=32292&format=png" class="icon"> Instagram
-      </a>
+    <a href="https://wa.me/message/ZPIOXNGV3YSEM1" target="_blank">
+        <img src="https://img.icons8.com/color/26/whatsapp.png"> WhatsApp DM
+    </a>
 
-      <a href="https://www.facebook.com/profile.php?id=61582999149557" target="_blank">
-        <img src="https://img.icons8.com/?size=24&id=118497&format=png" class="icon"> Facebook
-      </a>
-
-      <a href="https://wa.me/message/ZPIOXNGV3YSEM1" target="_blank">
-        <img src="https://img.icons8.com/?size=24&id=16713&format=png" class="icon"> WhatsApp DM
-      </a>
-
-    </div>
-  </div>
 </div>
-
-<style>
-  .icon {
-    width: 20px;
-    height: 20px;
-    vertical-align: middle;
-    margin-right: 8px;
-  }
-</style>
-
-<script>
-  const btn = document.getElementById("toggleSources");
-  const box = document.getElementById("sourceLinks");
-  let hidden = false;
-
-  btn.onclick = () => {
-    hidden = !hidden;
-    box.style.display = hidden ? "none" : "block";
-    btn.innerText = hidden ? "Show Sources" : "Hide Sources";
-  };
-</script>
