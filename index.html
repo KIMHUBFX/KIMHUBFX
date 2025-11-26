@@ -1,75 +1,138 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>KIMHUBFX</title>
-  <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KIMHUBFX</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f5f5f5;
+        }
+
+        /* Top Bar */
+        .topbar {
+            background: #ff4d4d;
+            color: white;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .menu-btn {
+            font-size: 28px;
+            margin-right: 15px;
+            cursor: pointer;
+        }
+
+        /* Left Slide Menu */
+        .side-menu {
+            width: 260px;
+            height: 100%;
+            background: white;
+            position: fixed;
+            top: 0;
+            left: -260px;
+            transition: 0.3s;
+            padding-top: 20px;
+            box-shadow: 2px 0 6px rgba(0,0,0,0.2);
+        }
+
+        .side-menu h2 {
+            text-align: center;
+            color: #ff4d4d;
+        }
+
+        .side-menu a {
+            display: block;
+            padding: 15px;
+            color: black;
+            text-decoration: none;
+            border-bottom: 1px solid #eee;
+            font-size: 18px;
+        }
+
+        .side-menu a:hover {
+            background: #ffe6e6;
+        }
+
+        /* Horizontal Menu */
+        .nav-scroll {
+            display: flex;
+            overflow-x: auto;
+            background: white;
+            border-bottom: 1px solid #ddd;
+            white-space: nowrap;
+        }
+
+        .nav-scroll div {
+            padding: 14px 25px;
+            font-size: 16px;
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+
+        .nav-scroll div:hover {
+            background: #ffefef;
+        }
+
+    </style>
 </head>
+<body>
 
-<body style="margin:0; font-family: Arial, sans-serif; background:#f2f2f2;">
+    <!-- LEFT MENU -->
+    <div id="sideMenu" class="side-menu">
+        <h2>KIMHUBFX</h2>
 
-  <!-- RED HEADER -->
-  <div style="
-      background:#FF3A3A;
-      padding:25px;
-      text-align:center;
-      color:white;
-      font-size:32px;
-      font-weight:bold;
-    ">
-    KIMHUBFX
-  </div>
+        <!-- Menu Links -->
+        <a href="#">Account Settings</a>
+        <a href="#">Cashier</a>
+        <a href="#">Dark Theme</a>
 
-  <!-- MAIN CARD -->
-  <div style="
-      background:white;
-      width:90%;
-      max-width:400px;
-      margin:40px auto;
-      padding:30px 20px;
-      border-radius:20px;
-      box-shadow:0 4px 10px rgba(0,0,0,0.1);
-      text-align:center;
-    ">
+        <!-- Channels -->
+        <a href="https://www.youtube.com/@kimhtai" target="_blank">YouTube</a>
+        <a href="https://t.me/kimhubfx" target="_blank">Telegram</a>
+        <a href="https://www.tiktok.com/@kimh.tai" target="_blank">TikTok</a>
+        <a href="https://www.instagram.com/kimh.tai" target="_blank">Instagram</a>
+        <a href="https://www.facebook.com/profile.php?id=61582999149557" target="_blank">Facebook</a>
+        <a href="https://whatsapp.com/channel/0029Vb77BD8B4hdNphlldH3g" target="_blank">WhatsApp Channel</a>
+        <a href="https://wa.me/message/ZPIOXNGV3YSEM1" target="_blank">DM on WhatsApp</a>
+    </div>
 
-    <h2 style="margin:0; font-size:26px; font-weight:bold;">Welcome to</h2>
-    <h2 style="margin-top:5px; font-size:28px; font-weight:bold;">KIMHUBFX</h2>
+    <!-- TOP BAR -->
+    <div class="topbar">
+        <span class="menu-btn" onclick="openMenu()">☰</span>
+        KIMHUBFX
+    </div>
 
-    <p style="color:#555; margin:10px 0 25px;">
-      Select an option to continue
-    </p>
+    <!-- HORIZONTAL MENU -->
+    <div class="nav-scroll">
+        <div>Dashboard</div>
+        <div>Bot Builder</div>
+        <div>DTrader</div>
+        <div>Analysis Tool</div>
+        <div>DP Tool</div>
+        <div>Analysis</div>
+        <div>FreeBots</div>
+    </div>
 
-    <!-- LOGIN BUTTON -->
-    <a href="login.html" style="
-        display:block;
-        background:#FF3A3A;
-        color:white;
-        padding:15px;
-        border-radius:12px;
-        text-decoration:none;
-        font-size:20px;
-        margin-bottom:15px;
-      ">
-      Login
-    </a>
+    <script>
+        function openMenu() {
+            document.getElementById("sideMenu").style.left = "0px";
+        }
 
-    <!-- CREATE ACCOUNT BUTTON -->
-    <a href="https://track.deriv.com/_rxkq5b729nXlURqNOf2s6GNd7ZgqdRLk/1/"
-       target="_blank"
-       style="
-        display:block;
-        background:#FF3A3A;
-        color:white;
-        padding:15px;
-        border-radius:12px;
-        text-decoration:none;
-        font-size:20px;
-      ">
-      Create Account
-    </a>
-
-  </div>
+        // Close menu when clicking outside
+        document.addEventListener("click", function(e) {
+            if (!document.getElementById("sideMenu").contains(e.target) &&
+                !e.target.classList.contains("menu-btn")) {
+                document.getElementById("sideMenu").style.left = "-260px";
+            }
+        });
+    </script>
 
 </body>
 </html>
