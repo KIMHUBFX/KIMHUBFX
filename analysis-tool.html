@@ -1,430 +1,225 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Analysis Tool • KIMHUBFX</title>
-<link rel="stylesheet" href="style.css"> <!-- your site CSS -->
-
+<link rel="stylesheet" href="style.css">
 <style>
-/* ---------- Light modern DollarPrinter-style (Option A) ---------- */
-:root{
-  --bg:#f4f6f8;
-  --card:#ffffff;
-  --muted:#6b7280;
-  --accent:#0f172a;
-  --highlight:#ff4d4d;
-  --gold:#f59e0b;
-  --green:#16a34a;
-  --glass: rgba(16,24,40,0.03);
+/* ---- PAGE STYLING ---- */
+.analysis-card {
+  background: #ffffff;
+  padding: 15px;
+  margin: 15px;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
 }
 
-*{box-sizing:border-box}
-html,body{height:100%;margin:0;font-family:Inter,system-ui,Arial,sans-serif;background:var(--bg);color:var(--accent)}
-.container{max-width:1100px;margin:18px auto;padding:12px}
-.card{background:var(--card);border-radius:12px;padding:14px;margin-bottom:14px;box-shadow:0 6px 20px rgba(16,24,40,0.06);border:1px solid rgba(2,6,23,0.04)}
-.top-row{display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap}
-.controls{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
-select,input[type=number]{padding:8px;border-radius:8px;border:1px solid #e6edf3;background:#fff;color:var(--accent);font-size:14px}
-.btn{background:var(--highlight);color:#fff;padding:9px 12px;border-radius:8px;border:0;font-weight:800;cursor:pointer}
-.btn.secondary{background:#eef2f6;color:var(--accent)}
-.small{font-size:13px;color:var(--muted)}
+.digit-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+  padding: 10px 0;
+}
 
-/* Price & summary */
-.price-box{display:flex;gap:18px;align-items:center;flex-wrap:wrap}
-.price-big{font-size:26px;font-weight:900;color:var(--accent)}
-.last-digit{font-size:34px;font-weight:900;color:var(--highlight)}
-.summary-stats{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.digit-box {
+  background: #f3f3f3;
+  border-radius: 8px;
+  padding: 12px;
+  text-align: center;
+  font-weight: bold;
+  color: #ff444f;
+  font-size: 18px;
+}
 
-/* Digit grid */
-.digit-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-top:12px}
-.digit-card{background:#fbfdff;border-radius:10px;padding:12px;text-align:center;border:1px solid rgba(2,6,23,0.02)}
-.digit-circle{width:72px;height:72px;border-radius:50%;margin:0 auto;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:22px;color:#fff;background:#09121a;box-shadow:0 8px 20px rgba(2,6,23,0.06)}
-.digit-circle.high{box-shadow:0 10px 40px rgba(16,185,129,0.12);border:3px solid rgba(16,185,129,0.12)}
-.digit-circle.low{box-shadow:0 10px 40px rgba(239,68,68,0.12);border:3px solid rgba(239,68,68,0.10)}
-.digit-pct{margin-top:8px;font-weight:800;color:var(--gold)}
-
-/* stream */
-.stream{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
-.stream .dot{background:#0b1220;color:#fff;padding:6px 8px;border-radius:6px;font-weight:800}
-
-/* heatmap */
-.heatmap{display:flex;gap:8px;align-items:flex-end;height:120px;padding:8px;border-radius:8px;background:linear-gradient(180deg,#fff,#fbfdff);border:1px solid rgba(2,6,23,0.02)}
-.heatbar{flex:1;display:flex;align-items:flex-end;justify-content:center;padding-bottom:6px;border-radius:6px;background:rgba(2,6,23,0.02)}
-.heatbar > div{width:100%;border-radius:6px 6px 0 0;text-align:center;color:#fff;font-weight:800;font-size:12px;padding-top:6px}
-
-/* even/odd and bars */
-.bars{display:flex;flex-direction:column;gap:10px;margin-top:12px}
-.bar-row{display:flex;align-items:center;gap:10px}
-.bar-label{width:80px;font-weight:800}
-.bar-track{flex:1;background:#eef3f7;border-radius:12px;overflow:hidden;height:14px}
-.bar-fill{height:100%;border-radius:12px;transition:width .18s ease}
-
-/* distribution table */
-.table{width:100%;border-collapse:collapse;margin-top:8px}
-.table th,.table td{padding:8px;border-bottom:1px solid #f3f6f8;font-size:14px}
-
-/* condition builder */
-.cond-row{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:8px}
-.cond-list{margin-top:10px}
-
-/* responsive */
-@media (max-width:820px){
-  .digit-grid{grid-template-columns:repeat(5,1fr)}
-  .price-big{font-size:20px}
+.tick-list {
+  max-height: 230px;
+  overflow-y: auto;
+  background: #fafafa;
+  padding: 10px;
+  border-radius: 8px;
+  font-family: monospace;
+  font-size: 14px;
 }
 </style>
 </head>
+
 <body>
 
-<!-- Keep your sidebar/topbar so it integrates with the rest of the site -->
+<!-- SIDEBAR -->
 <div id="sidebar" class="sidebar">
   <div class="side-inner">
     <h2>KIMHUBFX</h2>
-    <div class="section-title small">Channels</div>
-    <a href="https://wa.me/254724753475" target="_blank">WhatsApp DM</a>
+
+    <div class="section-title">Account</div>
+    <a href="#">Account Settings</a>
+    <a href="#">Cashier</a>
+    <a href="#">Dark Theme</a>
+
+    <div class="section-title">Channels</div>
+    <a href="https://wa.me/254724753475" target="_blank">WhatsApp</a>
     <a href="https://whatsapp.com/channel/0029Vb77BD8B4hdNphlldH3g" target="_blank">WhatsApp Channel</a>
     <a href="https://www.youtube.com/@kimhtai" target="_blank">YouTube</a>
-    <a href="https://t.me/kimhubfx" target="_blank">Telegram</a>
     <a href="https://www.tiktok.com/@kimh.tai" target="_blank">TikTok</a>
+    <a href="https://t.me/kimhubfx" target="_blank">Telegram</a>
     <a href="https://www.instagram.com/kimh.tai" target="_blank">Instagram</a>
     <a href="https://www.facebook.com/profile.php?id=61582999149557" target="_blank">Facebook</a>
   </div>
 </div>
 
+<!-- TOP BAR -->
 <header class="topbar">
-  <div style="display:flex;align-items:center;gap:12px;padding:10px 14px;background:transparent;">
+  <div class="left">
     <button class="icon-btn" onclick="appUI.openMenu()">☰</button>
-    <div style="font-weight:900;font-size:18px">KIMHUBFX</div>
-    <div style="margin-left:auto" id="authContainer" class="auth-buttons"></div>
+    <span class="logo">KIMHUBFX</span>
   </div>
+  <div id="authContainer" class="auth-buttons"></div>
 </header>
 
-<nav class="horizontal-menu" style="background:transparent;padding:8px 14px;border-bottom:1px solid rgba(2,6,23,0.03)">
-  <div style="display:flex;gap:16px;align-items:center;max-width:1100px;margin:0 auto;padding:8px 12px">
-    <div onclick="location.href='dashboard.html'" style="cursor:pointer;font-weight:700;color:var(--accent)">Dashboard</div>
-    <div onclick="location.href='bot-builder.html'" style="cursor:pointer">Bot Builder</div>
-    <div onclick="location.href='freebots.html'">FreeBots</div>
-    <div style="cursor:default;font-weight:800;color:var(--highlight)">Analysis Tool</div>
-    <div onclick="location.href='dp-tool.html'">DP Tool</div>
-    <div onclick="location.href='dtrader.html'">DTrader</div>
-    <div onclick="location.href='wallet.html'">Wallet</div>
-  </div>
+<!-- MENU BAR -->
+<nav class="horizontal-menu">
+  <div onclick="location.href='dashboard.html'">Dashboard</div>
+  <div onclick="location.href='bot-builder.html'">Bot Builder</div>
+  <div onclick="location.href='freebots.html'">FreeBots</div>
+  <div class="active">Analysis Tool</div>
+  <div onclick="location.href='analysis.html'">Analysis</div>
+  <div onclick="location.href='dp-tool.html'">DP Tool</div>
+  <div onclick="location.href='dtrader.html'">DTrader</div>
+  <div onclick="location.href='wallet.html'">Wallet</div>
 </nav>
 
+<!-- PAGE CONTENT -->
 <main class="container">
 
-  <!-- Controls -->
-  <div class="card">
-    <div class="top-row">
-      <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap">
-        <label class="small" style="font-weight:800">Market</label>
-        <select id="marketSelect" aria-label="market select" style="min-width:220px">
-          <optgroup label="Volatility Indices">
-            <option value="R_10">Volatility 10 (R_10)</option>
-            <option value="R_25">Volatility 25 (R_25)</option>
-            <option value="R_50">Volatility 50 (R_50)</option>
-            <option value="R_75">Volatility 75 (R_75)</option>
-            <option value="R_100" selected>Volatility 100 (R_100)</option>
-            <option value="R_150">Volatility 150 (R_150)</option>
-            <option value="R_200">Volatility 200 (R_200)</option>
-            <option value="R_250">Volatility 250 (R_250)</option>
-            <option value="R_300">Volatility 300 (R_300)</option>
-          </optgroup>
+  <h2>Analysis Tool</h2>
 
-          <optgroup label="1s Volatility">
-            <option value="1HZ10V">Volatility 10 (1s)</option>
-            <option value="1HZ25V">Volatility 25 (1s)</option>
-            <option value="1HZ50V">Volatility 50 (1s)</option>
-            <option value="1HZ75V">Volatility 75 (1s)</option>
-            <option value="1HZ100V">Volatility 100 (1s)</option>
-          </optgroup>
+  <!-- MARKET SELECTOR -->
+  <div class="analysis-card">
+    <h3>Select Market</h3>
+    <select id="marketSelect" style="padding:10px; width:100%; border-radius:8px;">
 
-          <optgroup label="2s Volatility">
-            <option value="2HZ10V">Volatility 10 (2s)</option>
-            <option value="2HZ25V">Volatility 25 (2s)</option>
-            <option value="2HZ50V">Volatility 50 (2s)</option>
-            <option value="2HZ75V">Volatility 75 (2s)</option>
-            <option value="2HZ100V">Volatility 100 (2s)</option>
-          </optgroup>
+      <!-- NORMAL VOLATILITY -->
+      <option value="R_10">Volatility 10</option>
+      <option value="R_25">Volatility 25</option>
+      <option value="R_50">Volatility 50</option>
+      <option value="R_75">Volatility 75</option>
+      <option value="R_100" selected>Volatility 100</option>
 
-          <optgroup label="Other">
-            <option value="BOOM300">Boom 300</option>
-            <option value="BOOM500">Boom 500</option>
-            <option value="BOOM1000">Boom 1000</option>
-            <option value="CRASH300">Crash 300</option>
-            <option value="CRASH500">Crash 500</option>
-            <option value="CRASH1000">Crash 1000</option>
-          </optgroup>
-        </select>
+      <!-- 1s VOLATILITY -->
+      <option value="1HZ10V">Volatility 10 (1s)</option>
+      <option value="1HZ25V">Volatility 25 (1s)</option>
+      <option value="1HZ50V">Volatility 50 (1s)</option>
+      <option value="1HZ75V">Volatility 75 (1s)</option>
+      <option value="1HZ100V">Volatility 100 (1s)</option>
 
-        <label class="small" style="font-weight:800">History size</label>
-        <input id="historySize" type="number" value="500" min="50" max="5000" style="width:110px" />
-
-        <button id="connectBtn" class="btn">Connect</button>
-        <button id="disconnectBtn" class="btn secondary">Disconnect</button>
-        <button id="pauseBtn" class="btn secondary">Pause</button>
-      </div>
-
-      <div style="text-align:right">
-        <div class="small">Connection</div>
-        <div id="connStatus" style="font-weight:900;color:var(--muted)">Disconnected</div>
-      </div>
-    </div>
+      <!-- HF VOLATILITY -->
+      <option value="R_10_HF">Volatility 10 HF</option>
+      <option value="R_25_HF">Volatility 25 HF</option>
+      <option value="R_50_HF">Volatility 50 HF</option>
+      <option value="R_75_HF">Volatility 75 HF</option>
+      <option value="R_100_HF">Volatility 100 HF</option>
+    </select>
   </div>
 
-  <!-- Price + Summary -->
-  <div class="card">
-    <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap">
-      <div>
-        <div class="small">Latest Price</div>
-        <div id="latestPrice" class="price-big">—</div>
-        <div id="latestTime" class="small">—</div>
-      </div>
+  <!-- DIGIT STATS -->
+  <div class="analysis-card">
+    <h3>Digit Frequency (0–9)</h3>
 
-      <div style="text-align:center">
-        <div class="small">Last Digit</div>
-        <div id="lastDigit" class="last-digit">—</div>
-      </div>
-
-      <div style="text-align:right">
-        <div class="small">Total ticks</div>
-        <div id="totalTicks" style="font-weight:900">0</div>
-      </div>
-    </div>
+    <div class="digit-grid" id="digitGrid"></div>
   </div>
 
-  <!-- Digits Grid -->
-  <div class="card">
-    <h3 style="margin:0 0 6px 0">Digits distribution (0–9)</h3>
-    <div id="digitGrid" class="digit-grid" role="region" aria-live="polite"></div>
-
-    <div class="stream" id="digitStream" aria-live="polite"></div>
+  <!-- TICK STREAM -->
+  <div class="analysis-card">
+    <h3>Live Tick Stream</h3>
+    <div id="tickStream" class="tick-list"></div>
   </div>
 
-  <!-- Right side controls: heatmap, bars, predictions -->
-  <div class="card" style="display:flex;gap:12px;flex-wrap:wrap">
-    <div style="flex:1;min-width:320px">
-      <div style="font-weight:800">Heatmap</div>
-      <div id="heatmap" class="heatmap" style="margin-top:8px"></div>
-
-      <div class="bars" style="margin-top:12px">
-        <div class="bar-row"><div class="bar-label">Even</div><div class="bar-track"><div id="evenBar" class="bar-fill" style="width:0%;background:var(--green)"></div></div><div id="evenPct" style="width:60px;text-align:right;font-weight:800">0%</div></div>
-        <div class="bar-row"><div class="bar-label">Odd</div><div class="bar-track"><div id="oddBar" class="bar-fill" style="width:0%;background:var(--highlight)"></div></div><div id="oddPct" style="width:60px;text-align:right;font-weight:800">0%</div></div>
-        <div class="bar-row"><div class="bar-label">Over (5-9)</div><div class="bar-track"><div id="overBar" class="bar-fill" style="width:0%;background:#10b981"></div></div><div id="overPct" style="width:60px;text-align:right;font-weight:800">0%</div></div>
-        <div class="bar-row"><div class="bar-label">Under (0-4)</div><div class="bar-track"><div id="underBar" class="bar-fill" style="width:0%;background:#fb7185"></div></div><div id="underPct" style="width:60px;text-align:right;font-weight:800">0%</div></div>
-      </div>
-    </div>
-
-    <div style="width:380px;min-width:260px">
-      <div style="font-weight:800">Prediction Engine</div>
-      <div id="freqPred" style="margin-top:8px"></div>
-      <div id="markovPred" style="margin-top:8px"></div>
-      <button id="refreshPred" class="btn" style="margin-top:8px">Refresh</button>
-
-      <hr style="margin:12px 0;border:none;border-top:1px solid #f2f6f8">
-
-      <div style="font-weight:800">Trending</div>
-      <div style="margin-top:8px">Top digit: <span id="topDigit" style="font-weight:900">—</span></div>
-      <div style="margin-top:8px">Streak: <span id="streakCount" style="font-weight:900">0</span></div>
-      <div id="recentDigits" style="margin-top:8px;color:var(--muted)"></div>
-    </div>
-  </div>
-
-  <!-- Distribution & Condition builder -->
-  <div class="card" style="display:flex;gap:12px;flex-wrap:wrap">
-    <div style="flex:1;min-width:300px">
-      <div style="font-weight:800;margin-bottom:8px">Distribution table</div>
-      <div style="max-height:240px;overflow:auto;border-radius:8px;border:1px solid #f2f6f8;padding:6px">
-        <table class="table" aria-label="digit distribution">
-          <thead><tr><th>Digit</th><th style="text-align:right">Count</th><th style="text-align:right">Percent</th><th>Bar</th></tr></thead>
-          <tbody id="distributionTable"></tbody>
-        </table>
-      </div>
-    </div>
-
-    <div style="min-width:320px">
-      <div style="font-weight:800;margin-bottom:8px">Condition builder</div>
-      <div class="cond-row">
-        <select id="condMetric" style="padding:8px;border-radius:8px">
-          <option value="pct_digit">Digit %</option>
-          <option value="count_digit">Digit count</option>
-          <option value="even_pct">Even %</option>
-          <option value="odd_pct">Odd %</option>
-          <option value="over_pct">Over %</option>
-        </select>
-        <input id="condDigit" type="number" placeholder="digit" min="0" max="9" style="width:70px;padding:8px;border-radius:8px" />
-        <select id="condOp" style="padding:8px;border-radius:8px"><option value=">">&gt;</option><option value="<">&lt;</option><option value="=">=</option></select>
-        <input id="condValue" type="number" placeholder="value" style="width:90px;padding:8px;border-radius:8px" />
-        <button id="addConditionBtn" class="btn">Add</button>
-      </div>
-      <div class="cond-list" id="conditionsList"></div>
-      <button id="evalBtn" class="btn" style="margin-top:10px">Evaluate Signals</button>
-      <div id="signalOutput" style="margin-top:10px"></div>
-    </div>
-  </div>
-
-  <div style="font-size:13px;color:var(--muted);margin-top:8px">Using Deriv public stream (app_id = 1089). Analysis works without login.</div>
 </main>
 
-<!-- -------------------- ENGINE (counts, UI updates, predictions) -------------------- -->
+<script src="menu.js"></script>
+
 <script>
-/* GLOBAL STATE */
-let digits = [];
-let maxHistory = 500;
-let paused = false;
-let lastPrice = null;
-let lastEpoch = null;
+/* =====================
+     DIGIT ENGINE
+======================*/
+let digitCount = Array(10).fill(0);
+let tickHistory = [];
+let ws;
 
-/* DOM refs */
-const marketSelect = document.getElementById('marketSelect');
-const historyInput = document.getElementById('historySize');
-const connStatus = document.getElementById('connStatus');
-const latestPrice = document.getElementById('latestPrice');
-const latestTime = document.getElementById('latestTime');
-const lastDigitEl = document.getElementById('lastDigit');
-const totalTicksEl = document.getElementById('totalTicks');
-const digitGrid = document.getElementById('digitGrid');
-const digitStream = document.getElementById('digitStream');
-const heatmapEl = document.getElementById('heatmap');
-const evenBar = document.getElementById('evenBar');
-const oddBar = document.getElementById('oddBar');
-const evenPctEl = document.getElementById('evenPct');
-const oddPctEl = document.getElementById('oddPct');
-const overBar = document.getElementById('overBar');
-const underBar = document.getElementById('underBar');
-const overPctEl = document.getElementById('overPct');
-const underPctEl = document.getElementById('underPct');
-const freqPred = document.getElementById('freqPred');
-const markovPred = document.getElementById('markovPred');
-const topDigitEl = document.getElementById('topDigit');
-const streakCountEl = document.getElementById('streakCount');
-const recentDigitsEl = document.getElementById('recentDigits');
-const distributionTable = document.getElementById('distributionTable');
-const condMetric = document.getElementById('condMetric');
-const condDigit = document.getElementById('condDigit');
-const condOp = document.getElementById('condOp');
-const condValue = document.getElementById('condValue');
-const conditionsList = document.getElementById('conditionsList');
-const signalOutput = document.getElementById('signalOutput');
-const connectBtn = document.getElementById('connectBtn');
-const disconnectBtn = document.getElementById('disconnectBtn');
-const pauseBtn = document.getElementById('pauseBtn');
-
-/* small helpers */
-function getCounts(){
-  const map = {}; for(let i=0;i<10;i++) map[i]=0;
-  digits.forEach(d => { map[d] = (map[d]||0) + 1 });
-  return map;
-}
-
-function formatPct(n){ return (Number(n)||0).toFixed(2) + '%'; }
-
-/* UI updates */
-function updateAllUI(){
-  updatePriceUI();
-  updateDigitGrid();
-  updateStream();
-  updateHeatmap();
-  updateBars();
-  updateDistributionTable();
-  updateTrending();
-  updatePredictions();
-}
-
-function updatePriceUI(){
-  latestPrice.textContent = lastPrice ?? '—';
-  latestTime.textContent = lastEpoch ? new Date(lastEpoch*1000).toLocaleTimeString() : '—';
-  lastDigitEl.textContent = digits.length ? digits[digits.length-1] : '—';
-  totalTicksEl.textContent = digits.length;
-}
-
-function updateDigitGrid(){
-  const counts = getCounts();
-  const total = Math.max(1, digits.length);
-  digitGrid.innerHTML = '';
-  // identify max/min
-  const maxCount = Math.max(...Object.values(counts));
-  const minCount = Math.min(...Object.values(counts));
-  for(let d=0; d<=9; d++){
-    const pct = (counts[d] / total * 100) || 0;
-    const card = document.createElement('div');
-    card.className = 'digit-card';
-    const circle = document.createElement('div');
-    circle.className = 'digit-circle';
-    circle.textContent = d;
-    if(counts[d] === maxCount && maxCount>0) circle.classList.add('high');
-    if(counts[d] === minCount && total>0) circle.classList.add('low');
-    const pctEl = document.createElement('div');
-    pctEl.className = 'digit-pct';
-    pctEl.textContent = pct.toFixed(2) + '%';
-    card.appendChild(circle);
-    card.appendChild(pctEl);
-    digitGrid.appendChild(card);
+/* Draw digit grid */
+function buildDigitGrid(){
+  const box = document.getElementById("digitGrid");
+  box.innerHTML = "";
+  for(let i=0;i<10;i++){
+    const div = document.createElement("div");
+    div.className = "digit-box";
+    div.id = "digit"+i;
+    div.innerText = i + ": 0%";
+    box.appendChild(div);
   }
 }
 
-function updateStream(){
-  digitStream.innerHTML = '';
-  const recent = digits.slice(-18).reverse();
-  recent.forEach(d => {
-    const el = document.createElement('div'); el.className = 'dot'; el.textContent = d;
-    el.style.background = (d%2===0) ? 'rgba(16,185,129,0.12)' : 'rgba(255,77,77,0.08)';
-    el.style.color = (d%2===0) ? '#0f5132' : '#7f1d1d';
-    digitStream.appendChild(el);
-  });
-}
-
-function updateHeatmap(){
-  const counts = getCounts();
-  const max = Math.max(...Object.values(counts)) || 1;
-  heatmapEl.innerHTML = '';
-  for(let d=0; d<=9; d++){
-    const bar = document.createElement('div'); bar.className = 'heatbar';
-    const height = Math.max(6, Math.round((counts[d]/max) * 100));
-    const inner = document.createElement('div'); inner.style.height = height + '%';
-    // color scale
-    if(counts[d] >= max*0.9) inner.style.background = 'linear-gradient(180deg,#16a34a,#047857)';
-    else if(counts[d] >= max*0.6) inner.style.background = 'linear-gradient(180deg,#f59e0b,#b45309)';
-    else inner.style.background = 'linear-gradient(180deg,#3b82f6,#1e40af)';
-    inner.textContent = counts[d] > 0 ? counts[d] : '';
-    bar.appendChild(inner);
-    heatmapEl.appendChild(bar);
+/* Update frequency boxes */
+function updateDigitBoxes(){
+  let total = digitCount.reduce((a,b)=>a+b,0);
+  for(let d=0; d<10; d++){
+    let pct = total === 0 ? 0 : ((digitCount[d]/total)*100).toFixed(1);
+    document.getElementById("digit"+d).innerText = `${d}: ${pct}%`;
   }
 }
 
-function updateBars(){
-  const total = Math.max(1, digits.length);
-  let even = 0; let over = 0;
-  for(let i=0;i<digits.length;i++){
-    if(digits[i] % 2 === 0) even++;
-    if(digits[i] > 4) over++;
-  }
-  const odd = total - even;
-  const evenPct = (even/total*100);
-  const oddPct = (odd/total*100);
-  const overPct = (over/total*100);
-  const underPct = (total - over)/total*100;
-
-  evenBar.style.width = evenPct.toFixed(2) + '%';
-  oddBar.style.width = oddPct.toFixed(2) + '%';
-  overBar.style.width = overPct.toFixed(2) + '%';
-  underBar.style.width = underPct.toFixed(2) + '%';
-
-  evenPctEl.textContent = evenPct.toFixed(2) + '%';
-  oddPctEl.textContent = oddPct.toFixed(2) + '%';
-  overPctEl.textContent = overPct.toFixed(2) + '%';
-  underPctEl.textContent = underPct.toFixed(2) + '%';
+/* Update tick stream */
+function pushTick(price, digit){
+  tickHistory.unshift(`Tick: ${price} → digit: ${digit}`);
+  if(tickHistory.length > 50) tickHistory.pop();
+  document.getElementById("tickStream").innerHTML = tickHistory.join("<br>");
 }
 
-function updateDistributionTable(){
-  const counts = getCounts();
-  const total = Math.max(1, digits.length);
-  distributionTable.innerHTML = '';
-  const maxCount = Math.max(...Object.values(counts)) || 1;
-  for(let d=0; d<=9; d++){
-    const pct = (counts[d]/total*100).toFixed(2);
-    const barPerc = Math.round((counts[d]/maxCount)*100);
-    const row = document.createElement('tr');
-    row.innerHTML = `<td>${d}</td><td style="text-align:right">${counts[d]}</td><td style="text-align:right">${pct}%</td>
-      <td><div style="background:#f1f5f9;height:10px;border-radius:6px;overflow:hidden"><div style="width:${barPerc}%;height:10px;background:${d%2===0?'#16a34a
+/* Process tick */
+function handleTick(t){
+  let price = t.quote;
+  let digit = Number(String(price).slice(-1));
+
+  digitCount[digit]++;
+  updateDigitBoxes();
+  pushTick(price, digit);
+}
+
+/* Connect to Deriv */
+function connectWS(symbol){
+  if(ws) ws.close();
+
+  ws = new WebSocket("wss://ws.binaryws.com/websockets/v3?app_id=1089");
+
+  ws.onopen = () => {
+    ws.send(JSON.stringify({
+      ticks: symbol,
+      subscribe: 1
+    }));
+  };
+
+  ws.onmessage = msg => {
+    let data = JSON.parse(msg.data);
+    if(data.tick) handleTick(data.tick);
+  };
+}
+
+/* Change market */
+document.getElementById("marketSelect").addEventListener("change", ()=>{
+  digitCount = Array(10).fill(0);
+  tickHistory = [];
+  updateDigitBoxes();
+  document.getElementById("tickStream").innerHTML = "";
+  connectWS(document.getElementById("marketSelect").value);
+});
+
+/* Initialize */
+document.addEventListener("DOMContentLoaded", ()=>{
+  appUI.renderAuthButtons('authContainer');
+  buildDigitGrid();
+  connectWS("R_100");
+});
+</script>
+
+</body>
+</html>
